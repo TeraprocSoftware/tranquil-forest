@@ -1,2 +1,11 @@
-h1 This is a partial
-  h2 {{ myVar }}
+.container
+    .jumbotron
+        h1 Teraproc R Analytics
+        p Welcome to Teraproc R Analytics! The most flexible and easiest way to develop your big data projects
+
+    .row
+        .col-md-6
+            div(ng-include="'/partials/featured-courses'")
+        .col-md-6
+            div(ng-include="'/partials/new-courses'")
+
