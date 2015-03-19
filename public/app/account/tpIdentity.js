@@ -1,6 +1,11 @@
-angular.module('app').factory('tpIdentity', function() {
+angular.module('app').factory('tpIdentity', function($window, tpUser) {
+    var currentUser;
+    if(!!$window.bootstrappedUserObject) {
+        currentUser = new tpUser();
+        angular.extend(currentUser, $window.bootstrappedUserObject);
+    }
     return {
-        currentUser: undefined,
+        currentUser: currentUser,
         isAuthenticated: function() {
             return !!this.currentUser;
         }

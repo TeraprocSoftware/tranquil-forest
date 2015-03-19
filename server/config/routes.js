@@ -2,7 +2,6 @@ var auth = require('./auth');
 
 module.exports = function(app) {
     app.get('/partials/*', function(req, res) {
-        console.log('req.params', req.params);
         res.render('../../public/app/' + req.params[0]);
     });
 
@@ -18,4 +17,4 @@ module.exports = function(app) {
             bootstrappedUser: req.user
         });
     });
-};
+}
