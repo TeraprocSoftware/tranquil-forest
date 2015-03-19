@@ -14,6 +14,21 @@ angular.module('app').factory('tpAuth', function ($http, tpIdentity, $q, tpUser)
             });
             return dfd.promise;
         },
+
+        createUser: function(newUserData) {
+            var newUser = new tpUser(newUserData);
+            var dfd = $q.defer();
+
+            newUser.$save().then(function() {
+                tpIdentity.currentUser = newUser;
+                dfd.resolve();
+            }, function(response) {
+                dfd.reject(response.data.reason);
+            });
+
+            return dfd.promise;
+        },
+
         logoutUser: function () {
             var dfd = $q.defer();
             $http.post('/logout', {logout: true}).then(function () {
