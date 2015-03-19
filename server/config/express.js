@@ -17,7 +17,7 @@ module.exports = function(app, config) {
     app.use(cookieParser());
     app.use(bodyParser.urlencoded({extended: true}));
     app.use(bodyParser.json());
-    app.use(session({secret: 'let me in plesae 123'}));
+    app.use(session({secret: 'let me in plesae 123', resave: false, saveUninitialized: false}));
     app.use(passport.initialize());
     console.log('passport initialized');
     app.use(passport.session());
