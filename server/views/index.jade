@@ -9,7 +9,8 @@ block main-content
          .navbar-collapse.collapse
              ul.nav.navbar-nav
                li 
-                 a(href="/") Home 123
+                 a(href="/") Home
+             div(ng-include="'/partials/account/navbar-login'")
 
    section.content
       div(ng-view)

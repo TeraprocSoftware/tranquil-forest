@@ -1,6 +1,6 @@
-angular.module('app').controller('tpMainCtrl', function($scope, tpAPI) {
+angular.module('app').controller('tpMainCtrl', function($scope, tpServices) {
 
-    $scope.data = tpAPI.userQuery('');
-    console.log('$scope.data', $scope.data);
+    $scope.users = tpServices.userQuery('');
+    console.log('$scope.users', $scope.users);
 });
 
