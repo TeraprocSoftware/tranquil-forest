@@ -6,4 +6,4 @@ angular.module('app').factory('tpUser', function($resource) {
     }
 
     return UserResource;
-})
+});

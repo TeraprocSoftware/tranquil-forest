@@ -1,8 +1,8 @@
-angular.module('app').factory('tpAuth', function($http, tpIdentity, $q, tpUser) {
+angular.module('app').factory('tpAuth', function ($http, tpIdentity, $q, tpUser) {
     return {
-        authenticateUser: function(username, password) {
+        authenticateUser: function (username, password) {
             var dfd = $q.defer();
-            $http.post('/login', {username: username, password: password}).then(function(response) {
+            $http.post('/login', {username: username, password: password}).then(function (response) {
                 if (response.data.success) {
                     var user = new tpUser();
                     angular.extend(user, response.data.user);
@@ -14,13 +14,20 @@ angular.module('app').factory('tpAuth', function($http, tpIdentity, $q, tpUser) 
             });
             return dfd.promise;
         },
-        logoutUser: function() {
+        logoutUser: function () {
             var dfd = $q.defer();
-            $http.post('/logout', {logout: true}).then(function() {
+            $http.post('/logout', {logout: true}).then(function () {
                 tpIdentity.currentUser = undefined;
                 dfd.resolve();
             });
             return dfd.promise;
+        },
+        authorizeCurrentUserForRoute: function (role) {
+            if (tpIdentity.isAuthorized(role)) {
+                return true;
+            } else {
+                return $q.reject('not authorized');
+            }
         }
     }
 });
