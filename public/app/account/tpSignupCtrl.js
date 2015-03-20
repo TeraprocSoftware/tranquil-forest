@@ -2,7 +2,7 @@ angular.module('app').controller('tpSignupCtrl', function($scope, tpUser, tpAuth
 
     $scope.signup = function() {
         var newUserData = {
-            userName: $scope.email,
+            username: $scope.email,
             password: $scope.password,
             firstName: $scope.fname,
             lastName: $scope.lname

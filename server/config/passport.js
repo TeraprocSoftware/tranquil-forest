@@ -6,11 +6,12 @@ var passport = require('passport'),
 module.exports = function() {
     passport.use(new LocalStrategy(
         function(username, password, done) {
-            console.log('passport: ', username);
+            console.log('---- passport: ', username);
 
             // Call Teraproc API to login user
 
-            User.findOne({userName: username}).exec(function(err, user) {
+            User.findOne({username: username}).exec(function(err, user) {
+                console.log('---- findOne: ', username);
                 if(user && user.authenticate(password)) {
                     return done(null, user);
                 } else {

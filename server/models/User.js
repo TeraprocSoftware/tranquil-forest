@@ -1,12 +1,11 @@
-
 var mongoose = require('mongoose'),
     encrypt = require('../utilities/encryption');
 
 
 var userSchema = mongoose.Schema({
-    firstName: {type:String, required:'{PATH} is required!'},
-    lastName: {type:String, required: '{PATH} is required!'},
-    userName: {
+    firstName: {type: String, required: '{PATH} is required!'},
+    lastName: {type: String, required: '{PATH} is required!'},
+    username: {
         type: String,
         required: '{PATH} is required!',
         unique: true
@@ -26,29 +25,24 @@ var User = mongoose.model('User', userSchema);
 function createDefaultUsers() {
     User.find({}).exec(function (err, collection) {
         if (collection.length === 0) {
+            console.log('--- collection length = 0, creating default users');
             var salt, hash;
             salt = encrypt.createSalt();
             hash = encrypt.hashPwd(salt, 'Feng');
-            User.create({
-                firstName: 'Feng',
-                lastName: 'Li',
-                userName: 'fengli',
-                salt: salt,
-                hashed_pwd: hash,
-                roles: []
-            });
+            User.create({firstName: 'Feng', lastName: 'Li', username: 'fengli', salt: salt, hashed_pwd: hash, roles: []});
+
             salt = encrypt.createSalt();
             hash = encrypt.hashPwd(salt, 'Meng');
-            User.create({firstName: 'Meng', lastName: 'Ding', userName: 'mding', salt: salt, hashed_pwd: hash});
+            User.create({firstName: 'Meng', lastName: 'Ding', username: 'mding', salt: salt, hashed_pwd: hash});
             salt = encrypt.createSalt();
             hash = encrypt.hashPwd(salt, 'Weina');
-            User.create({firstName: 'Weina', lastName: 'Ma', userName: 'weina', salt: salt, hashed_pwd: hash});
+            User.create({firstName: 'Weina', lastName: 'Ma', username: 'weina', salt: salt, hashed_pwd: hash});
             salt = encrypt.createSalt();
             hash = encrypt.hashPwd(salt, 'Daniel');
             User.create({
                 firstName: 'Daniel',
                 lastName: 'Wong',
-                userName: 'wongda',
+                username: 'wongda',
                 salt: salt,
                 hashed_pwd: hash,
                 roles: ['admin']
