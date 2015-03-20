@@ -5,7 +5,7 @@ angular.module('app').controller('tpNavBarLoginCtrl', function($scope, $http, tp
         tpAuth.authenticateUser(username, password).then(function(success) {
             if(success) {
                 tpNotifier.notify('You have successfully signed in!');
-                $location.path('/plan');
+                $location.path('/overview');
             } else {
                 tpNotifier.notify('Username or Password is incorrect');
             }

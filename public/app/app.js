@@ -24,6 +24,18 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
         .when('/plan', { templateUrl: '/partials/main/plan',
             controller: 'tpPlanCtrl', resolve: routeRoleChecks.user
         })
+        .when('/credential', { templateUrl: '/partials/main/credential',
+            controller: 'tpCredentialCtrl', resolve: routeRoleChecks.user
+        })
+        .when('/overview', { templateUrl: '/partials/main/overview',
+            controller: 'tpOverviewCtrl', resolve: routeRoleChecks.user
+        })
+        .when('/launch', { templateUrl: '/partials/main/launch',
+            controller: 'tpLaunchCtrl', resolve: routeRoleChecks.user
+        })
+        .when('/clustermgr', { templateUrl: '/partials/main/clustermgr',
+            controller: 'tpClusterMgrCtrl', resolve: routeRoleChecks.user
+        })
 });
 
 angular.module('app').run(function($rootScope, $location) {

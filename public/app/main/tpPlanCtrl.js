@@ -1,7 +1,8 @@
-angular.module('app').controller('tpPlanCtrl', function($scope) {
+angular.module('app').controller('tpPlanCtrl', function($scope, $location) {
 
     $scope.selectPlan = function(plan) {
-      console.log('plan selected: ', plan);
+        console.log('plan selected: ', plan);
+        $location.path('/launch');
     };
     $scope.flavors = [
         {
