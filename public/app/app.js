@@ -4,6 +4,9 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
     var routeRoleChecks = {
         admin: {auth: function(tpAuth) {
             return tpAuth.authorizeCurrentUserForRoute('admin')
+        }},
+        user: {auth: function(tpAuth) {
+            return tpAuth.authorizeAuthenticatedUserForRoute()
         }}
     }
     $locationProvider.html5Mode(true);
@@ -14,6 +17,12 @@ angular.module('app').config(function($routeProvider, $locationProvider) {
         })
         .when('/signup', { templateUrl: '/partials/account/signup',
             controller: 'tpSignupCtrl'
+        })
+        .when('/profile', { templateUrl: '/partials/account/profile',
+            controller: 'tpProfileCtrl', resolve: routeRoleChecks.user
+        })
+        .when('/plan', { templateUrl: '/partials/main/plan',
+            controller: 'tpPlanCtrl', resolve: routeRoleChecks.user
         })
 });
 

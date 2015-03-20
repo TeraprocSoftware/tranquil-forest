@@ -1,15 +1,14 @@
 .panel.panel-primary
-    .panel-heading.text-center queryUser | enable = true
+    .panel-heading.text-center Default Test Accounts (uid/pwd = Username/FirstName)
     .panel-body
         .row
             .col-md-2 <u>First Name
             .col-md-2 Last Name
             .col-md-2 Username
-            .col-md-2 Email
-            .col-md-4 User Id</u>
+            .col-md-2 Email</u>
         .row(ng-repeat="user in users | filter:{enabled:true}")
             .col-md-2 {{user.firstname}}
             .col-md-2 {{user.lastname}}
             .col-md-2 {{user.username}}
             .col-md-2 {{user.email}}
-            .col-md-4 {{user.id}}
+

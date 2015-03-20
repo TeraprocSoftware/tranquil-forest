@@ -29,6 +29,20 @@ angular.module('app').factory('tpAuth', function ($http, tpIdentity, $q, tpUser)
             return dfd.promise;
         },
 
+        updateCurrentUser: function(newUserData) {
+            var dfd = $q.defer();
+
+            var clone = angular.copy(tpIdentity.currentUser);
+            angular.extend(clone, newUserData);
+            clone.$update().then(function() {
+                tpIdentity.currentUser = clone;
+                dfd.resolve();
+            }, function(response) {
+                dfd.reject(response.data.reason);
+            });
+            return dfd.promise;
+        },
+
         logoutUser: function () {
             var dfd = $q.defer();
             $http.post('/logout', {logout: true}).then(function () {
@@ -39,6 +53,13 @@ angular.module('app').factory('tpAuth', function ($http, tpIdentity, $q, tpUser)
         },
         authorizeCurrentUserForRoute: function (role) {
             if (tpIdentity.isAuthorized(role)) {
+                return true;
+            } else {
+                return $q.reject('not authorized');
+            }
+        },
+        authorizeAuthenticatedUserForRoute: function() {
+            if (tpIdentity.isAuthenticated()) {
                 return true;
             } else {
                 return $q.reject('not authorized');

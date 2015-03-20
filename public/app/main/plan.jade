@@ -1,0 +1,36 @@
+.container
+    h3 Please select a plan (fixme add condition)
+    .panel.panel-primary(ng-repeat="flavor in flavors")
+        .panel-heading Service Plan: {{flavor.cloudPlatform}}-{{flavor.name}}
+        .panel-body
+            .row
+                .col-md-6
+                    h4 Master
+                    .row
+                        .col-md-6 Instance Type
+                        .col-md-6 {{flavor.instanceGroups[1].parameters.instanceType}}
+                    .row
+                        .col-md-6 Node Count
+                        .col-md-6 {{flavor.instanceGroups[1].nodeCount}}
+                    .row
+                        .col-md-6 Volume Type
+                        .col-md-6 {{flavor.instanceGroups[1].parameters.volumeType}}
+                    .row
+                        .col-md-6 Volume Count
+                        .col-md-6 {{flavor.instanceGroups[1].volumeCount}}
+                    .row
+                        .col-md-6 Volume Size
+                        .col-md-6 {{flavor.instanceGroups[1].volumeSize}}
+                .col-md-6
+                    h4 Slave
+                    .row
+                        .col-md-6 Instance Type
+                        .col-md-6 {{flavor.instanceGroups[0].parameters.instanceType}}
+                    .row
+                        .col-md-6 Node Count
+                        .col-md-6 {{flavor.instanceGroups[0].nodeCount}}
+            .row
+                .col-md-10.col-md-offset-2
+                    .pull-right
+                        button.btn-primary(ng-click="selectPlan(flavor)") Select
+
