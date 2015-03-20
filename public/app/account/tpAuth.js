@@ -2,7 +2,7 @@ angular.module('app').factory('tpAuth', function ($http, tpIdentity, $q, tpUser)
     return {
         authenticateUser: function (username, password) {
             var dfd = $q.defer();
-            $http.post('/login', {username: username, password: password}).then(function (response) {
+            $http.post('/login', {userName: username, password: password}).then(function (response) {
                 if (response.data.success) {
                     var user = new tpUser();
                     angular.extend(user, response.data.user);

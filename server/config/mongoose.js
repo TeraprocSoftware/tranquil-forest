@@ -1,8 +1,8 @@
-
 var mongoose = require('mongoose'),
-    encrypt = require('../utilities/encryption');
+    userModel = require('../models/User');
 
-module.exports = function(config) {
+
+module.exports = function (config) {
 
     mongoose.connect(config.db);
     var db = mongoose.connection;
@@ -11,37 +11,6 @@ module.exports = function(config) {
         console.log('teraproc db opened');
     });
 
-    var userSchema = mongoose.Schema({
-        firstName: String,
-        lastName: String,
-        userName: String,
-        salt: String,
-        hashed_pwd: String,
-        roles: [String]
-    });
-    userSchema.methods = {
-        authenticate: function(passwordToMatch) {
-            return encrypt.hashPwd(this.salt, passwordToMatch) === this.hashed_pwd;
-        }
-    }
+    userModel.createDefaultUsers();
 
-    var User = mongoose.model('User', userSchema);
-
-    User.find({}).exec(function(err, collection) {
-        if (collection.length === 0) {
-            var salt, hash;
-            salt = encrypt.createSalt();
-            hash = encrypt.hashPwd(salt, 'Feng');
-            User.create({firstName: 'Feng', lastName: 'Li', userName: 'fengli', salt: salt, hashed_pwd: hash, roles: []});
-            salt = encrypt.createSalt();
-            hash = encrypt.hashPwd(salt, 'Meng');
-            User.create({firstName: 'Meng', lastName: 'Ding', userName: 'mding', salt: salt, hashed_pwd: hash});
-            salt = encrypt.createSalt();
-            hash = encrypt.hashPwd(salt, 'Weina');
-            User.create({firstName: 'Weina', lastName: 'Ma', userName: 'weina', salt: salt, hashed_pwd: hash});
-            salt = encrypt.createSalt();
-            hash = encrypt.hashPwd(salt, 'Daniel');
-            User.create({firstName: 'Daniel', lastName: 'Wong', userName: 'wongda', salt: salt, hashed_pwd: hash, roles: ['admin']});
-        }
-    })
-}
+};

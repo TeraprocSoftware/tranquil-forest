@@ -17,4 +17,7 @@ angular.module('app').controller('tpNavBarLoginCtrl', function($scope, $http, tp
             $location.path('/');
         })
     }
+    $scope.signup = function() {
+        $location.path('/signup');
+    }
 });
